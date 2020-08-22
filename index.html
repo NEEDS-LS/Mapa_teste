@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <style>
+        #map {
+            width: 1617px;
+            height: 834px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/muni_ALPA_0.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-24.551678279040736,-50.117034673074194],[-22.944323866094088,-46.996989748904916]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_muni_ALPA_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">COD_IBGE</th>\
+                        <td>' + (feature.properties['COD_IBGE'] !== null ? autolinker.link(feature.properties['COD_IBGE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">COD_UFMESO</th>\
+                        <td>' + (feature.properties['COD_UFMESO'] !== null ? autolinker.link(feature.properties['COD_UFMESO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOME_MESO</th>\
+                        <td>' + (feature.properties['NOME_MESO'] !== null ? autolinker.link(feature.properties['NOME_MESO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">COD_UFMICR</th>\
+                        <td>' + (feature.properties['COD_UFMICR'] !== null ? autolinker.link(feature.properties['COD_UFMICR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOME_MICRO</th>\
+                        <td>' + (feature.properties['NOME_MICRO'] !== null ? autolinker.link(feature.properties['NOME_MICRO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">COD_UF</th>\
+                        <td>' + (feature.properties['COD_UF'] !== null ? autolinker.link(feature.properties['COD_UF'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOME_UF</th>\
+                        <td>' + (feature.properties['NOME_UF'] !== null ? autolinker.link(feature.properties['NOME_UF'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOME_MUNI</th>\
+                        <td>' + (feature.properties['NOME_MUNI'] !== null ? autolinker.link(feature.properties['NOME_MUNI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">UF</th>\
+                        <td>' + (feature.properties['UF'] !== null ? autolinker.link(feature.properties['UF'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ident</th>\
+                        <td>' + (feature.properties['ident'] !== null ? autolinker.link(feature.properties['ident'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Area</th>\
+                        <td>' + (feature.properties['Area'] !== null ? autolinker.link(feature.properties['Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_muni_ALPA_0_0(feature) {
+            switch(String(feature.properties['NOME_MUNI'])) {
+                case 'Angatuba':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(113,211,157,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Apiaí':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,49,40,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Arandu':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(83,72,228,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Avaré':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(188,200,91,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Barão de Antonina':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,140,216,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Bernardino de Campos':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(58,228,112,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Bofete':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(40,219,169,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Bom Sucesso de Itararé':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,220,57,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Buri':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,58,144,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Campina do Monte Alegre':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(226,224,88,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Capão Bonito':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(128,110,204,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Cerqueira César':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,145,18,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Chavantes':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(157,93,200,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Coronel Macedo':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(124,226,69,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Fartura':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(12,25,206,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Guapiara':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(12,25,206,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Guareí':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(110,206,20,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ipaussu':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,230,136,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Itaberá':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,79,234,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Itaí':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(33,201,179,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Itapetininga':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(93,218,59,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Itapeva':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(220,98,108,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Itaporanga':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(87,148,217,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Itararé':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(34,193,217,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Itatinga':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(126,38,225,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Manduri':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,75,195,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Nova Campina':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,48,236,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Paranapanema':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(206,111,181,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pardinho':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(170,79,203,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Piedade':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,112,236,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pilar do Sul':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,112,236,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Piraju':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,140,88,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ribeirão Branco':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,188,46,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ribeirão Grande':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(205,51,16,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Riversul':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(95,216,84,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'São Miguel Arcanjo':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,79,13,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sarapuí':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(163,233,49,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sarutaiá':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(238,75,173,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Taguaí':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(96,231,231,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tapiraí':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(47,228,56,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Taquarituba':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,123,145,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Taquarivaí':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,197,227,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tejupá':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,194,90,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Timburi':
+                    return {
+                pane: 'pane_muni_ALPA_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(59,152,213,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_muni_ALPA_0');
+        map.getPane('pane_muni_ALPA_0').style.zIndex = 400;
+        map.getPane('pane_muni_ALPA_0').style['mix-blend-mode'] = 'normal';
+        var layer_muni_ALPA_0 = new L.geoJson(json_muni_ALPA_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_muni_ALPA_0',
+            layerName: 'layer_muni_ALPA_0',
+            pane: 'pane_muni_ALPA_0',
+            onEachFeature: pop_muni_ALPA_0,
+            style: style_muni_ALPA_0_0,
+        });
+        bounds_group.addLayer(layer_muni_ALPA_0);
+        map.addLayer(layer_muni_ALPA_0);
+        setBounds();
+        var i = 0;
+        layer_muni_ALPA_0.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['NOME_MUNI'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['NOME_MUNI']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_muni_ALPA_0'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        map.addControl(new L.Control.Search({
+            layer: layer_muni_ALPA_0,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'NOME_UF'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        resetLabels([layer_muni_ALPA_0]);
+        map.on("zoomend", function(){
+            resetLabels([layer_muni_ALPA_0]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_muni_ALPA_0]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_muni_ALPA_0]);
+        });
+        </script>
+    </body>
+</html>
